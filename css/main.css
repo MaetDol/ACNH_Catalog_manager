@@ -1,0 +1,202 @@
+/* variables */
+:root {
+    --theme-bg-light: #F9F6E7;
+    --theme-point: #8BC691;
+    --theme-point-light: #CAE2AC;
+    --theme-warn-light: #F9D5D5;
+    --text: #2B2B2B;
+    --text-light: rgba(0, 0, 0, 0.55);
+    --text-point: #1A8CF6;
+    --text-point-light: #a3caff;
+    --text-small: 0.7rem;
+    font-size: 20px;
+}
+
+/* RESET */
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; }
+h1, h5, span, p, a, li, button { color: var(--text); font: normal 1rem/130% "Noto Sans KR"; }
+h1 { font-size: 1.8rem; }
+ul, ol { padding: 0; }
+li { list-style: none; }
+a { text-decoration: none; }
+button { background: none; border: none; padding: 0; cursor: pointer; }
+
+.text-light { color: var(--text-light); }
+.text-small { font-size: var(--text-small); }
+
+.tag { 
+    background: var(--theme-point-light); 
+    padding: 4px 8px; 
+    border-radius: 3px; 
+    display: inline-block;
+    margin: 0 8px 8px 0;
+}
+a, button {
+    background-color: transparent;
+    transition: background-color .1s ease-out;
+}
+a:hover, button:hover {
+    background-color: var(--text-point-light);
+}
+
+/* Title */
+.underline {
+    position: relative;
+    z-index: 0;
+    font-size: inherit;
+}
+.underline::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    left: 0;
+    bottom: 0.15em;
+    height: 0.4em;
+    width: 100%;
+    z-index: -1;
+    background-color: var(--theme-point-light);
+}
+
+
+/*=========================
+        Main
+=========================*/
+#container {
+    width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    background-color: var(--theme-bg-light);
+    padding: 56px 0 104px 56px;
+    border-right: 32px solid var(--theme-point);
+    position: relative;
+}
+
+/*=========================
+        Table list
+=========================*/
+#table-list-wrapper {
+    margin: 36px auto;
+    padding: 0 80px;
+}
+#table-list-wrapper header span {
+    display: inline-block;
+    margin-right: 24px;
+}
+/* Table */
+#table-list .table {
+    position: relative;
+    width: 416px;
+    display: inline-block;
+    margin: 0 48px 48px 0;
+}
+.table h5 {
+    margin: 0 0 8px;
+}
+.table h5 .ic-chevron-right {
+    font-size: 0;
+    padding: 12px;
+    margin-left: 4px;
+    background-image: url(../images/icons/chevron_right.svg);
+    vertical-align: bottom;
+    display: inline-block;
+}
+.table h5 .delete {
+    float: right;
+    font-size: var(--text-small);
+    background: var(--theme-warn-light);
+    padding: 2px;
+}
+.table .card {
+    background: white;
+    box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
+    width: 100%;
+    height: 240px;
+    padding: 16px;
+    border-radius: 0 30px 30px 0;
+    position: relative;
+    overflow: hidden;
+}
+.table .card .table-link {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 0;
+    display: inline-block;
+}
+.table .card span,
+.table .card li,
+.table .card h5 {
+    font-size: var(--text-small);
+}
+.table .card .achievement,
+.table .card .include-tags {
+    width: 200px;
+    display: inline-block;
+}
+.table .card .achievement {
+    margin-bottom: 24px;
+}
+.table .card .achievement .header {
+    overflow: hidden;
+}
+.table .card .achievement .header .title {
+    float: left;
+}
+.table .card .achievement .header .percentage {
+    color: var(--text-point);
+    float: right;
+}
+.table .card .achievement .progress-bar {
+    width: 100%;
+    height: 4px;
+    background: #D0CFD4;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15) inset;
+    position: relative;
+    border-radius: 3px;
+}
+.table .card .achievement .progress-bar .progress {
+    display: inline-block;
+    height: 100%;
+    background-color: var(--text-point);
+    position: absolute;
+    border-radius: 4px;
+    box-shadow: 2px 0 4px rgba(0,0,0,0.15);
+}
+.table .card .include-tags .header {
+    margin-bottom: 8px;
+}
+.table .card .pi-graph {
+    position: absolute;
+    background: lightblue;
+    right: 16px;
+    bottom: 16px;
+    width: 160px;
+    height: calc(100% - 32px);
+}
+.table .copy-table-link {
+    float: right;
+    font-size: var(--text-small);
+    margin-top: 8px;
+}
+.table .copy-table-link .ic-copy {
+    font-size: 0;
+    padding: 8px;
+    background-image: url(../images/icons/copy.svg);
+    vertical-align: middle;
+    display: inline-block;
+}
+
+
+footer {
+    position: absolute;
+    bottom: 0;
+    right: 136px;
+    background: white;
+    display: inline-block;
+    border-bottom: 16px solid var(--theme-point-light);
+    padding: 0 40px;
+    border-radius: 30px 30px 0 0;
+}
