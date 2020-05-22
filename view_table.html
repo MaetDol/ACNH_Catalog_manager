@@ -1,0 +1,275 @@
+<!-- https://djkeh.github.io/articles/How-to-write-a-git-commit-message-kor/ -->
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인적인 테이블</title>
+    <link rel="stylesheet" href="css/template.css">
+    <link rel="stylesheet" href="css/view_table.css">
+</head>
+<body>
+    <div id="container">
+        <h1 class="title">
+            <a class="underline" href="/">카탈로그 체크 리스트</a>
+        </h1>
+        
+        <section>
+            <header class="table-name">개인적인 테이블</header>
+
+            <div id="search">
+                <input id="search_input" type="text" required>
+                <label for="search_input">검색어를 입력하세요</label>
+                <button class="submit">검색</button>
+                <ul class="autocomple dropdown"></ul>
+            </div>
+
+            <div id="filter">
+                <button class="show-list text-light">필터<span class="text-light">+</span></button>
+                <ul id="applied-filters">
+                    <li><button class="tag">DIY제작 불가능<span class="ic ic-close">삭제</span></button></li>
+                    <li><button class="tag">너굴상점 구매가능<span class="ic ic-close">삭제</span></button></li>
+                    <li><button class="tag">리폼 불가능<span class="ic ic-close">삭제</span></button></li>
+                </ul>
+
+                <ul id="applicable-filters" class="dropdown">
+                    <li>DIY제작 <span class="true">포함</span></li>
+                    <li>DIY제작 <span class="false">제외</span></li>
+                </ul>
+            </div>
+            
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="complete-stamp">보유 여부<button class="ic ic-sort-desc">오름차순/내림차순 정렬</button></th>
+                            <th class="furniture-name">아이템 명<button class="ic ic-sort-desc">오름차순/내림차순 정렬</button></th>
+                            <th class="variations">다른 색상<button class="ic ic-sort-desc">오름차순/내림차순 정렬</button></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="complete-stamp"></td>
+                            <th class="furniture-name">
+                                <img src="images/image 3.png" alt="가구명 사진">
+                                <div class="text-group">
+                                    <span class="kr">마다가스카르비단제비나방 모형</span>
+                                    <span class="en">K.K. concert, Nook Shopping Catalog</span>
+                                </div>
+                            </th>
+                            <td class="variations">
+                                <ul>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td class="delete"><button>삭제하기</button></td>
+                        </tr>
+                        <tr class="complete">
+                            <td class="complete-stamp"><img src="images/icons/complete stamp.png" alt="완료 도장"></td>
+                            <th class="furniture-name">
+                                <img src="images/image 3.png" alt="가구명 사진">
+                                <div class="text-group">
+                                    <span class="kr">마다가스카르비단제비나방 모형</span>
+                                    <span class="en">K.K. concert, Nook Shopping Catalog</span>
+                                </div>
+                            </th>
+                            <td class="variations">
+                                <ul>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td class="delete"><button>삭제하기</button></td>
+                        </tr>
+                        <tr>
+                            <td class="complete-stamp"></td>
+                            <th class="furniture-name">
+                                <img src="images/image 3.png" alt="가구명 사진">
+                                <div class="text-group">
+                                    <span class="kr">마다가스카르비단제비나방 모형</span>
+                                    <span class="en">K.K. concert, Nook Shopping Catalog</span>
+                                </div>
+                            </th>
+                            <td class="variations">
+                                <ul>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                            <span class="has">보유중</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <img src="images/image 3.png" alt="하얀색 사진">
+                                            <span class="color-name">화이트</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td class="delete"><button>삭제하기</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+
+
+        <footer>
+            <p class="text-light text-small">본 사이트는 비영리 목적으로 제작된 웹 페이지 입니다</p>
+            <p class="text-light text-small">This page is a 3rd-party application that claims <br>
+                no ownership of any intellectual property associated with <br>
+                Nintendo or Animal Crossing.
+            </p>
+        </footer>
+    </div>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+
+</body>
+</html>

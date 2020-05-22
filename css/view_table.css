@@ -1,0 +1,164 @@
+
+section {
+    padding-right: 56px;
+}
+section .table-name {
+    display: inline-block;
+    margin-bottom: 16px;
+}
+
+/* 검색 */
+#search {
+    float: right;
+    position: relative;
+}
+#search label {
+    position: absolute;
+    left: 16px;
+    z-index: 1;
+    color: transparent;
+    line-height: 56px;
+}
+#search_input:invalid + label {
+    color: var(--text-light);
+}
+#search_input {
+    width: 320px;
+    height: 56px;
+    padding-left: 16px;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 8px solid var(--theme-point);
+}
+#search .submit {
+    margin-left: 40px;
+    width: 72px;
+    height: 56px;
+    background-color: var(--theme-point);
+    border-radius: 8px;
+}
+#search .submit:hover {
+    background-color: var(--theme-point-light);
+}
+
+/* 필터 */
+#filter {
+    font-size: 0;
+    width: calc(100% - 464px);
+    margin-bottom: 24px;
+}
+#filter .show-list,
+#applied-filters li,
+#applied-filters {
+    display: inline-block;
+    margin-right: 16px;
+}
+#applied-filters .tag {
+    margin: 0;
+}
+#applied-filters .tag:hover {
+    background-color: var(--theme-warn);
+}
+#applied-filters .tag .ic-close {
+    background: url("../images/icons/close.svg") left 16px/16px;
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+    line-height: 30px;
+}
+
+/* Table */
+.table-wrapper {
+    height: 640px;
+    background: white;
+    box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    text-align: left;
+}
+/* Table head */
+thead {
+    border-bottom: 2px solid var(--text-light);
+}
+thead tr {
+    height: 56px;
+}
+thead tr th {
+    padding-left: 16px;
+    text-align: left;
+}
+.ic-sort-desc {
+    background: url("../images/icons/sort.png");
+    padding: 12px;
+    vertical-align: bottom;
+    margin-left: 8px;
+}
+thead tr th.complete-stamp {
+    width: 156px;
+}
+thead tr th.furniture-name {
+    width: 400px;
+}
+thead tr th.variations {
+    width: 680px;
+}
+/* Table body */
+tbody tr {
+    height: 80px;
+    border-bottom: 2px solid #DDD;
+}
+tbody tr.complete {
+    background: rgba(0,0,0,0.1);
+}
+tbody th, td {
+    padding-left: 16px;
+}
+tbody .furniture-name .text-group {
+    display: inline-block;
+    margin-left: 16px;
+    line-height: 0px;
+    vertical-align: top;
+}
+tbody .furniture-name .kr {
+    display: block;
+}
+tbody .furniture-name .en {
+    color: var(--text-light);
+    font-size: var(--text-small);
+}
+tbody .variations ul {
+    margin: 0;
+}
+tbody .variations li {
+    display: inline-block;
+    position: relative;
+    padding: 0 8px;
+}
+tbody .variations li img {
+    width: 48px;
+    display: block;
+}
+tbody .variations li .has {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 64px;
+}
+tbody .variations li img,
+tbody .variations li .color-name {
+    opacity: 0.2;
+}
+tbody .delete button {
+    padding: 8px 16px;
+    background-color: var(--theme-warn-light);
+}
+tbody .delete button:hover {
+    background-color: var(--theme-warn);
+}
