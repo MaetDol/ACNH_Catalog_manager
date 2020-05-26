@@ -10,6 +10,7 @@
     --text-point: #1A8CF6;
     --text-point-light: #a3caff;
     --text-small: 0.7rem;
+    --disabled: #DDD;
     font-size: 20px;
 }
 
@@ -24,8 +25,8 @@ a { text-decoration: none; }
 input { border: none; }
 button { background: none; border: none; padding: 0; cursor: pointer; }
 
-.text-light { color: var(--text-light); }
-.text-small { font-size: var(--text-small); }
+.text.light { color: var(--text-light); }
+.text.small { font-size: var(--text-small); }
 
 .ic {
     font-size: 0;
@@ -42,12 +43,22 @@ a, button {
     background-color: transparent;
     transition: background-color .1s ease-out;
 }
+a:focus, button:focus,
 a:hover, button:hover {
     background-color: var(--text-point-light);
 }
 
 .dropdown {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin: 0;
+    overflow-y: scroll;
+    background: white;
+    border: 1px solid var(--text);
+    z-index: 10;
+    box-shadow: 4px 4px 16px rgba(0,0,0,0.15);
 }
 
 /* Title */
@@ -73,7 +84,7 @@ a:hover, button:hover {
     min-height: 100%;
     overflow: hidden;
     background-color: var(--theme-bg-light);
-    padding: 56px 0 104px 56px;
+    padding: 56px 0 146px 56px;
     border-right: 32px solid var(--theme-point);
     position: relative;
 }
