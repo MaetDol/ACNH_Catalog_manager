@@ -29,22 +29,53 @@ section .table-name {
     border-radius: 8px 8px 0 0;
     border-bottom: 8px solid var(--theme-point);
 }
-#search .submit {
-    margin-left: 40px;
-    width: 72px;
-    height: 56px;
-    background-color: var(--theme-point);
-    border-radius: 8px;
+#search .autocomple {
+    max-height: 320px;
+    width: 320px;
 }
-#search .submit:hover {
-    background-color: var(--theme-point-light);
+#search .autocomple.show {
+    display: inline-block;
 }
-
+#search .autocomple li {
+    padding: 8px;
+    position: relative;
+    font-size: 0;
+}
+#search .autocomple li.added { 
+    background: var(--disabled); 
+}
+#search .autocomple li.added::after {
+    content: "추가됨";
+    color: var(--text-light);
+    font-size: var(--text-small);
+    float: right;
+    line-height: 1;
+}
+#search .autocomple div {
+    display: inline-block;
+}
+#search .autocomple .image-wrapper {
+    vertical-align: top;
+    margin-right: 8px;
+}
+#search .autocomple .text-wrapper {
+    width: 168px;
+    font-size: 0;
+}
+#search .autocomple .text-wrapper button {
+    overflow: hidden;
+    text-align: left;
+    word-break: break-word;
+}
+#search .autocomple .text-wrapper span {
+    display: block;
+}
 /* 필터 */
 #filter {
     font-size: 0;
     width: calc(100% - 464px);
     margin-bottom: 24px;
+    position: relative;
 }
 #filter .show-list,
 #applied-filters li,
@@ -65,9 +96,44 @@ section .table-name {
     margin-left: 4px;
     line-height: 30px;
 }
+#applicable-filters {
+    width: 216px;
+    max-height: 360px;
+}
+#applicable-filters.show {
+    display: inline-block;
+}
+#applicable-filters li {
+    position: relative;
+    padding: 16px;
+    font-size: 0;
+}
+#applicable-filters .added {
+    background: var(--disabled);
+}
+#applicable-filters li.added::after {
+    content: "추가됨";
+    color: var(--text-light);
+    font-size: var(--text-small);
+    float: right;
+    line-height: 1;
+}
+#applicable-filters button {
+    max-width: 120px;
+    word-break: break-word;
+    text-align: left;
+    overflow: hidden;
+}
+#applicable-filters .true {
+    background: var(--theme-point-light);
+}
+#applicable-filters .false {
+    background: var(--theme-warn-light);
+}
 
 /* Table */
 .table-wrapper {
+    overflow-y: scroll;
     height: 640px;
     background: white;
     box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
@@ -80,13 +146,15 @@ th, td {
     text-align: left;
 }
 /* Table head */
-thead {
-    border-bottom: 2px solid var(--text-light);
-}
 thead tr {
     height: 56px;
 }
 thead tr th {
+    border-bottom: 2px solid var(--text-light);
+    z-index: 1;
+    background: white;
+    position: sticky;
+    top: 0;
     padding-left: 16px;
     text-align: left;
 }
@@ -108,10 +176,16 @@ thead tr th.variations {
 /* Table body */
 tbody tr {
     height: 80px;
-    border-bottom: 2px solid #DDD;
+    border-bottom: 2px solid var(--disabled);
 }
 tbody tr.complete {
     background: rgba(0,0,0,0.1);
+}
+tbody tr td.complete-stamp button {
+    display: flex;
+    margin-left: 16px;
+    height: 72px;
+    width: 80px;
 }
 tbody th, td {
     padding-left: 16px;
@@ -139,6 +213,7 @@ tbody .variations li {
 }
 tbody .variations li img {
     width: 48px;
+    margin: auto;
     display: block;
 }
 tbody .variations li .has {
@@ -151,8 +226,8 @@ tbody .variations li .has {
     text-align: center;
     line-height: 64px;
 }
-tbody .variations li img,
-tbody .variations li .color-name {
+tbody .variations li.has img,
+tbody .variations li.has .color-name {
     opacity: 0.2;
 }
 tbody .delete button {
