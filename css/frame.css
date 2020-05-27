@@ -84,7 +84,7 @@ a:hover, button:hover {
     min-height: 100%;
     overflow: hidden;
     background-color: var(--theme-bg-light);
-    padding: 56px 0 146px 56px;
+    padding: 32px 0 146px 56px;
     border-right: 32px solid var(--theme-point);
     position: relative;
 }
