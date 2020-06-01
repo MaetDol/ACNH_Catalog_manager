@@ -1,0 +1,20 @@
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kroject.acnh.mapper.variantMapper">
+
+    <inesrt id="insertVariant">
+        INSERT  variants(color_en, color_kr, image_url, item_id)
+        VALUES  (#{color_en}, #{color_kr}, #{image_url}, #{item_id})
+    </insert>
+    
+    <select id="selectItemVariants" resultType="ItemVO">
+        SELECT  id, color_kr, image_url
+        FROM    variants
+        WHERE   item_id = #{item_id}
+    </select>
+
+</mapper>

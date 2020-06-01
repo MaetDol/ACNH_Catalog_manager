@@ -1,0 +1,20 @@
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kroject.acnh.mapper.rowMapper">
+
+    <inesrt id="insertRow">
+        INSERT  rows(sheet_id, item_id)
+        VALUES  (#{sheet_id}, #{item_id})
+    </insert>
+
+    <select id="selectAvailableSheetRows" resultType="RowVO">
+        SELECT  id, is_complete, item_id
+        FROM    rows
+        WHERE   sheet_id = #{sheetid} AND is_deleted = FALSE
+    </select>
+    
+</mapper>
