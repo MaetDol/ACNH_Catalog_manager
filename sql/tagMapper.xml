@@ -11,6 +11,7 @@
         VALUES  (#{category}, #{content});
     </insert>
 
+    <!-- queries for item_tags table-->
     <insert id="insertItemTag">
         INSERT  item_tags(tag_id, item_id)
         VALUES  (#{tag_id}, #{item_id});

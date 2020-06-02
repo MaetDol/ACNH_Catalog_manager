@@ -1,7 +1,8 @@
 function init() {
 
   const findFunction = function( query ) {
-    return this.querySelectorAll( query );
+    const elems = this.querySelectorAll( query );
+    return elems.length === 1 ? elems[0] : elems;
   }
 
   Document.prototype.find = findFunction;

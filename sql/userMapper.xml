@@ -11,10 +11,10 @@
         VALUES  (#{id}, #{#password})
     </insert>
 
-    <select id="selectPassword" resultType="String">
-        SELECT  password
+    <select id="selectUserCountByIdAndPassword" resultType="Integer">
+        SELECT  COUNT(id)
         FROM    users
-        WHERE   id = #{id}
+        WHERE   id = #{id} AND password = #{password}
     </select>
 
 </mapper>

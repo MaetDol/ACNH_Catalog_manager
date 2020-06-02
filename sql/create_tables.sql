@@ -4,6 +4,7 @@ USE acnh_catalog_manager;
 CREATE TABLE `users` (
     `id` varchar(30) NOT NULL,
     `password` varchar(30) NOT NULL,
+    `permission` int NOT NULL DEFAULT 1
     `sign_up_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(`id`)
 );
@@ -21,7 +22,6 @@ CREATE TABLE `sheets` (
 
 CREATE TABLE `variants` (
     `id` int NOT NULL AUTO_INCREMENT,
-    `variant_id` VARCHAR(5) NOT NULL DEFAULT '0_0',
     `color_en` varchar(20) NOT NULL,
     `color_kr` varchar(30) NOT NULL,
     `image_url` varchar(10),
@@ -52,9 +52,11 @@ CREATE TABLE `rows` (
 );
 
 CREATE TABLE `row_item_variants` (
+    `id` int NOT NULL AUTO_INCREMENT,
     `is_owned` boolean DEFAULT false,
     `row_id` int NOT NULL,
     `variant_id` int NOT NULL,
+    PRIMARY KEY(`id`),
     CONSTRAINT FOREIGN KEY (`row_id`) REFERENCES `rows` (`id`),
     CONSTRAINT FOREIGN KEY (`variant_id`) REFERENCES `variants` (`id`)
 );

@@ -17,4 +17,24 @@
         WHERE   sheet_id = #{sheetid} AND is_deleted = FALSE
     </select>
     
+    <inesrt id="insertRowItemVariant">
+        INSERT  row_item_variants(row_id, variant_id)
+        VALUES  (#{row_id}, #{variant_id})
+    </insert>
+
+
+    <!-- queries for row_item_variants table -->
+    <update id="updateRowItemVariant">
+        UPDATE  row_item_variants
+        SET     is_owned = #{is_owned}
+        WHERE   id = #{id}
+    </update>
+
+    <select id="selectRowItemVariants" resultType="RowVO">
+        SELECT  is_owned, id as row_item_variant_id
+        FROM    row_item_variants
+        WHERE   row_id = #{row_id}
+    </select>
+
+    
 </mapper>
