@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -6,7 +5,7 @@
 
 <mapper namespace="com.kroject.acnh.mapper.rowMapper">
 
-    <inesrt id="insertRow">
+    <insert id="insertRow">
         INSERT  rows(sheet_id, item_id)
         VALUES  (#{sheet_id}, #{item_id})
     </insert>
@@ -14,10 +13,10 @@
     <select id="selectAvailableSheetRows" resultType="RowVO">
         SELECT  id, is_complete, item_id
         FROM    rows
-        WHERE   sheet_id = #{sheetid} AND is_deleted = FALSE
+        WHERE   sheet_id = #{sheet_id} AND is_deleted = FALSE
     </select>
     
-    <inesrt id="insertRowItemVariant">
+    <insert id="insertRowItemVariant">
         INSERT  row_item_variants(row_id, variant_id)
         VALUES  (#{row_id}, #{variant_id})
     </insert>
