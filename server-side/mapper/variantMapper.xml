@@ -7,12 +7,12 @@
 <mapper namespace="com.kroject.acnh.mapper.variantMapper">
 
     <inesrt id="insertVariant">
-        INSERT  variants(color_en, color_kr, image_url, item_id)
-        VALUES  (#{color_en}, #{color_kr}, #{image_url}, #{item_id})
+        INSERT  variants(color_en, color_kr, file_id, item_id)
+        VALUES  (#{color_en}, #{color_kr}, #{file_id}, #{item_id})
     </insert>
     
     <select id="selectItemVariants" resultType="ItemVO">
-        SELECT  id, color_kr, image_url
+        SELECT  id, color_kr, file_id
         FROM    variants
         WHERE   item_id = #{item_id}
     </select>

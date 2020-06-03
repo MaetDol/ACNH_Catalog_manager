@@ -4,7 +4,7 @@ USE acnh_catalog_manager;
 CREATE TABLE `users` (
     `id` varchar(30) NOT NULL,
     `password` varchar(30) NOT NULL,
-    `permission` int NOT NULL DEFAULT 1
+    `permission` int NOT NULL DEFAULT 1,
     `sign_up_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(`id`)
 );
@@ -24,7 +24,7 @@ CREATE TABLE `variants` (
     `id` int NOT NULL AUTO_INCREMENT,
     `color_en` varchar(20) NOT NULL,
     `color_kr` varchar(30) NOT NULL,
-    `image_url` varchar(10),
+    `file_id` varchar(100),
     `item_id` int NOT NULL,
     PRIMARY KEY(`id`)
 );
