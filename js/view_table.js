@@ -20,11 +20,9 @@ window.addEventListener('keydown', ({key}) => {
   switch( key ) {
     case 'ArrowLeft':
     case 'ArrowUp':
-      focusPreviousElement();
       break;
     case 'ArrowRight':
     case 'ArrowDown':
-      focusNextElement();
       break;
   }
 });
@@ -37,18 +35,4 @@ function isPrintableKeyCode( keyCode ) {
     (keyCode > 95 && keyCode < 112)  || // numpad keys
     (keyCode > 185 && keyCode < 193) || // ;=,-./` (in order)
     (keyCode > 218 && keyCode < 223);   // [\]' (in order)
-}
-
-function moveFocus() {
-
-  onFocusCallbacks.forEach( fnc => fnc() );
-}
-
-function focusNextElement() {
-  const currentElement = document.activeElement;
-
-}
-
-function focusPreviousElement() {
-
 }

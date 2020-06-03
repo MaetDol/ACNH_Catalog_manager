@@ -222,6 +222,7 @@ tbody .variations li img {
 }
 tbody .variations li .has {
     font-size: 0;
+    float: left;
 }
 tbody .variations li.has img,
 tbody .variations li.has .color-name {
