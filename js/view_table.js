@@ -16,13 +16,20 @@ searchWrapper.addEventListener('keydown', ({ keyCode }) => {
 });
 
 // 방향키로 포커스 이동
+const focusManager = new FocusManager();
 window.addEventListener('keydown', ({key}) => {
   switch( key ) {
     case 'ArrowLeft':
+      focusManager.moveLeft();
+      break;
     case 'ArrowUp':
+      focusManager.moveUp();
       break;
     case 'ArrowRight':
+      focusManager.moveRight();
+      break;
     case 'ArrowDown':
+      focusManager.moveDown();
       break;
   }
 });
