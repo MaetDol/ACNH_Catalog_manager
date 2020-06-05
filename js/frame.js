@@ -1,8 +1,7 @@
 function init() {
 
   const findFunction = function( query ) {
-    const elems = this.querySelectorAll( query );
-    return elems.length === 1 ? elems[0] : elems;
+    return this.querySelectorAll( query );
   };
 
   Document.prototype.find = findFunction;
@@ -20,7 +19,9 @@ function init() {
 
   HTMLElement.prototype.hasClass = function( cls ) { return this.classList.contains( cls )};
   HTMLElement.prototype.findParentByClass = function( cls ) {
-
+    if( isBodyElement(this) ) {
+      return this;
+    }
     let parent = this.parentElement;
     while( !isBodyElement( parent ) && !parent.hasClass( cls ) ) {
       parent = parent.parentElement;
@@ -31,5 +32,5 @@ function init() {
 init();
 
 function isBodyElement(e) {
-  return e.tagName == document.find('body').tagName;
+  return e.tagName == document.find('body')[0].tagName;
 }
