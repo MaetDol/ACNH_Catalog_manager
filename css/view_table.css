@@ -3,7 +3,6 @@ section {
     padding-right: 56px;
 }
 section .table-name {
-    display: inline-block;
     margin-bottom: 16px;
 }
 
@@ -11,6 +10,7 @@ section .table-name {
 #search {
     float: right;
     position: relative;
+    margin-bottom: 24px;
 }
 #search label {
     position: absolute;
@@ -74,8 +74,9 @@ section .table-name {
 #filter {
     font-size: 0;
     width: calc(100% - 464px);
-    margin-bottom: 24px;
     position: relative;
+    display: inline-block;
+    margin-bottom: 24px;
 }
 #filter .show-list,
 #applied-filters li,
@@ -140,6 +141,7 @@ section .table-name {
     height: 640px;
     background: white;
     box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
+    clear: both;
 }
 table {
     width: 100%;
@@ -232,6 +234,7 @@ tbody .delete button {
     padding: 8px 16px;
     background-color: var(--theme-warn-light);
 }
-tbody .delete button:hover {
+tbody .delete button:hover,
+tbody .delete button:focus {
     background-color: var(--theme-warn);
 }

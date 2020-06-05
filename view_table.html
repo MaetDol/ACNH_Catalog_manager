@@ -9,18 +9,51 @@
 </head>
 <body>
     <div id="container">
-        <h1 class="title">
+        <h1 class="title focus-row">
             <a class="underline" href="/">카탈로그 체크 리스트</a>
         </h1>
         
         <section>
             <header class="table-name">개인적인 테이블</header>
 
-            <div id="search">
+            <div id="filter" class="focus-row">
+                <button class="show-list text light">필터<span class="text light">+</span></button>
+
+                <ul id="applicable-filters" class="dropdown">
+                    <li class="added focus-row">
+                        <button>
+                            DIY제작 <span class="true">포함</span>
+                        </button>
+                    </li>
+                    <li class="focus-row">
+                        <button>
+                            DIY제작 <span class="false">제외</span>
+                        </button>
+                    </li>
+                    <li class="added focus-row">
+                        <button>
+                            너굴상점에서 구매 <span class="true">가능</span>
+                        </button>
+                    </li>
+                    <li class="focus-row">
+                        <button>
+                            너굴상점에서 구매 <span class="false">불가능</span>
+                        </button>
+                    </li>
+                </ul>
+
+                <ul id="applied-filters">
+                    <li><button class="tag true">DIY제작 불가능<span class="ic ic-close">삭제</span></button></li>
+                    <li><button class="tag true">너굴상점 구매가능<span class="ic ic-close">삭제</span></button></li>
+                    <li><button class="tag false">리폼 불가능<span class="ic ic-close">삭제</span></button></li>
+                </ul>
+            </div>
+            
+            <div id="search" class="focus-row">
                 <input id="search_input" type="text" required>
                 <label for="search_input">검색어를 입력하세요</label>
                 <ul id="search-item" class="autocomple dropdown">
-                    <li class="added">
+                    <li class="added focus-row">
                         <div class="image-wrapper">
                             <img src="images/image 3.png" alt="가구명 사진">
                         </div>
@@ -31,7 +64,7 @@
                             </button>
                         </div>
                     </li>
-                    <li class="">
+                    <li class="focus-row">
                         <div class="image-wrapper">
                             <img src="images/image 3.png" alt="가구명 사진">
                         </div>
@@ -42,7 +75,7 @@
                             </button>
                         </div>
                     </li>
-                    <li class="">
+                    <li class="focus-row">
                         <div class="image-wrapper">
                             <img src="images/image 3.png" alt="가구명 사진">
                         </div>
@@ -53,7 +86,7 @@
                             </button>
                         </div>
                     </li>
-                    <li class="">
+                    <li class="focus-row">
                         <div class="image-wrapper">
                             <img src="images/image 3.png" alt="가구명 사진">
                         </div>
@@ -64,7 +97,7 @@
                             </button>
                         </div>
                     </li>
-                    <li class="">
+                    <li class="focus-row">
                         <div class="image-wrapper">
                             <img src="images/image 3.png" alt="가구명 사진">
                         </div>
@@ -75,7 +108,7 @@
                             </button>
                         </div>
                     </li>
-                    <li class="">
+                    <li class="focus-row">
                         <div class="image-wrapper">
                             <img src="images/image 3.png" alt="가구명 사진">
                         </div>
@@ -86,7 +119,7 @@
                             </button>
                         </div>
                     </li>
-                    <li class="">
+                    <li class="focus-row">
                         <div class="image-wrapper">
                             <img src="images/image 3.png" alt="가구명 사진">
                         </div>
@@ -100,39 +133,6 @@
                 </ul>
             </div>
 
-            <div id="filter">
-                <button class="show-list text light">필터<span class="text light">+</span></button>
-
-                <ul id="applicable-filters" class="dropdown show">
-                    <li class="added">
-                        <button>
-                            DIY제작 <span class="true">포함</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button>
-                            DIY제작 <span class="false">제외</span>
-                        </button>
-                    </li>
-                    <li class="added">
-                        <button>
-                            너굴상점에서 구매 <span class="true">가능</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button>
-                            너굴상점에서 구매 <span class="false">불가능</span>
-                        </button>
-                    </li>
-                </ul>
-
-                <ul id="applied-filters" class="focus-row">
-                    <li><button class="tag true">DIY제작 불가능<span class="ic ic-close">삭제</span></button></li>
-                    <li><button class="tag true">너굴상점 구매가능<span class="ic ic-close">삭제</span></button></li>
-                    <li><button class="tag false">리폼 불가능<span class="ic ic-close">삭제</span></button></li>
-                </ul>
-            </div>
-            
             <div class="table-wrapper">
                 <table>
                     <thead>
