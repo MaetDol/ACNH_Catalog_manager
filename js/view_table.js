@@ -1,4 +1,7 @@
+const sheetItems = [];
 
+
+// 검색창 관련 코드들
 const searchWrapper = document.find('#search')[0];
 const searchInput = document.find('#search_input')[0];
 const searchResult = document.find('#search-item')[0];
@@ -8,15 +11,103 @@ const hideSearchResult = ({ relatedTarget }) => {
     searchResult.classList.remove('show');
   }
 };
-searchInput.addEventListener('focus', showSearchResult );
-searchWrapper.addEventListener('focusout', hideSearchResult );
-searchWrapper.addEventListener('keydown', ({ keyCode }) => {
+const focusSearchInput = ({ keyCode }) => {
   if( isPrintableKeyCode( keyCode )) {
     searchInput.focus();
   }
-});
+};
+const autoComplete = e => {
+  // const datas = search( e.target.value );
+  const datas = [
+    {
+      id: 132,
+      name_en: 'English name!',
+      name_kr: '한국 명칭!',
+      preview_variant_id: '34sd4sQAaP',
+      tags: [
+        {
+          id:1,
+          category: 'Source',
+          content: '너굴 상점'
+        }, {
+          id:2,
+          category: 'HHA Concept',
+          content: '야외 가구'
+        },
+      ],
+      variants: [
+        {
+          id: 1,
+          color_en: 'white',
+          color_kr: '화이트',
+          file_id: '34sd4sQAaP0_1',
+          item_id: 132
+        }, {
+          id: 2,
+          color_en: 'yellow',
+          color_kr: '노랑',
+          file_id: '34sd4sQAaP0_2',
+          item_id: 132
+        }
+      ]
+    }, {
+      id: 136,
+      name_en: 'Some cute name!',
+      name_kr: '뀨잉!',
+      preview_variant_id: 'aqwssA0_1',
+      tags: [
+        {
+          id:1,
+          category: 'Source',
+          content: '너굴 상점'
+        }, {
+          id:3,
+          category: 'HHA Concept',
+          content: '큐트'
+        },
+      ],
+      variants: [
+        {
+          id: 3,
+          color_en: 'white',
+          color_kr: '화이트',
+          file_id: 'aqwssA0_1',
+          item_id: 136
+        }, {
+          id: 4,
+          color_en: 'yellow',
+          color_kr: '노랑',
+          file_id: 'aqwssA0_2',
+          item_id: 136
+        }
+      ]
+    },
+  ];
+  
+  let elements = '';
+  for( let data of datas ) {
+    const isAdded = sheetItems.includes( data ) ? 'added' : '';
+    elements += `
+      <li class="${isAdded} focus-row">
+          <div class="image-wrapper">
+              <img src="acnhcdn사이트/${data.variants[0].file_id}" alt="${data.name_kr} 사진">
+          </div>
+          <div class="text-wrapper">
+              <button>
+                  <span class="kr">${data.name_kr}</span>
+                  <span class="en text small light">${data.name_en}</span>
+              </button>
+          </div>
+      </li>`;
+  }
+  searchResult.innerHTML = elements;
+};
+searchInput.addEventListener('focus', showSearchResult );
+searchWrapper.addEventListener('focusout', hideSearchResult );
+searchWrapper.addEventListener('keydown', focusSearchInput );
+searchWrapper.addEventListener('input', autoComplete );
 
-
+// 필터 관련 코드들
 const filter = document.find('#filter')[0];
 const showFilterButton = filter.find('.show-list')[0];
 const applicableFilters = document.find('#applicable-filters')[0];
@@ -28,6 +119,7 @@ const hideApplicableFilters = ({ relatedTarget }) => {
 };
 showFilterButton.addEventListener('focus', showApplicableFilters );
 filter.addEventListener('focusout', hideApplicableFilters );
+
 
 // 방향키로 포커스 이동
 const focusManager = new FocusManager();
@@ -49,6 +141,10 @@ window.addEventListener('keydown', ({key}) => {
       break;
   }
 });
+
+async function search( keyword ) {
+  return await fetch(`/search/${keyword}`).json();
+}
 
 function isPrintableKeyCode( keyCode ) {
   // Reference: https://stackoverflow.com/a/12467610
