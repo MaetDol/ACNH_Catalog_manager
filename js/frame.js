@@ -23,7 +23,7 @@ function init() {
       return this;
     }
     let parent = this.parentElement;
-    while( !isBodyElement( parent ) && !parent.hasClass( cls ) ) {
+    while( !isBodyElement( parent ) && !parent.hasClass( cls )) {
       parent = parent.parentElement;
     }
     return parent;

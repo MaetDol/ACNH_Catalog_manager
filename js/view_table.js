@@ -1,4 +1,6 @@
-const sheetItems = [];
+
+const sheetBody = document.find('.table-wrapper table tbody')[0];
+const sheet = new Sheet( sheetBody );
 
 
 // 검색창 관련 코드들
@@ -86,9 +88,9 @@ const autoComplete = e => {
   
   let elements = '';
   for( let data of datas ) {
-    const isAdded = sheetItems.includes( data ) ? 'added' : '';
+    const isAdded = sheet.hasItem( data.id ) ? 'added' : '';
     elements += `
-      <li class="${isAdded} focus-row">
+      <li class="${isAdded} focus-row" data-item-id="${data.id}">
           <div class="image-wrapper">
               <img src="acnhcdn사이트/${data.variants[0].file_id}" alt="${data.name_kr} 사진">
           </div>
@@ -102,12 +104,25 @@ const autoComplete = e => {
   }
   searchResult.innerHTML = elements;
 };
+const addOrRemoveItemToSheet = ({ key, target }) => {
+  console.log(e)
+  if( key.toLowerCase() == 'enter' ) {
+    const li = target.findParentByClass('focus-row');
+    const itemId = li.dataset.itemId;
+    
+    if( sheetItems[itemId] ) {
+      
+    }
+  }
+};
 searchInput.addEventListener('focus', showSearchResult );
 searchWrapper.addEventListener('focusout', hideSearchResult );
 searchWrapper.addEventListener('keydown', focusSearchInput );
 searchWrapper.addEventListener('input', autoComplete );
+searchWrapper.addEventListener('keydown', addOrRemoveItemToSheet );
 
-// 필터 관련 코드들
+
+// 필터창 관련 코드들
 const filter = document.find('#filter')[0];
 const showFilterButton = filter.find('.show-list')[0];
 const applicableFilters = document.find('#applicable-filters')[0];
@@ -121,11 +136,29 @@ showFilterButton.addEventListener('focus', showApplicableFilters );
 filter.addEventListener('focusout', hideApplicableFilters );
 
 
+// 시트 클릭 이벤트
+sheetBody.addEventListener('click', ({ target, path }) => {
+  let pressedButton = false;
+  for( let elem of path ) {
+    
+    if( elem.tagName === 'BUTTON' ) {
+      pressedButton = true;
+    }
+
+    if( elem.tagName?.match(/^TH|^TD/) ) {
+      if( pressedButton ) {
+        console.log(target, elem.className )
+      }
+    }
+  }
+});
+
+
 // 방향키로 포커스 이동
 const focusManager = new FocusManager();
 focusManager.watchMutation( filter );
 focusManager.watchMutation( searchWrapper );
-window.addEventListener('keydown', ({key}) => {
+window.addEventListener('keydown', ({ key }) => {
   switch( key ) {
     case 'ArrowLeft':
       focusManager.moveLeft();
@@ -143,6 +176,7 @@ window.addEventListener('keydown', ({key}) => {
 });
 
 async function search( keyword ) {
+  // 첫번째 검색 결과를 이용해서 클라이언트측에서 검색?
   return await fetch(`/search/${keyword}`).json();
 }
 

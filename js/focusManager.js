@@ -1,7 +1,6 @@
 class FocusManager {
 
   constructor() {
-    
     this.ROW_CLASS = 'focus-row'  
     this.updateFocusableCollection();
     this.observer = new MutationObserver( (() => this.updateFocusableCollection()).bind(this) );
@@ -106,4 +105,4 @@ class FocusManager {
 }
 
 
-// export {  FocusManager };
+// export { FocusManager };
