@@ -193,6 +193,12 @@ tbody tr td.complete-stamp button {
     height: 72px;
     width: 80px;
 }
+tbody tr .complete-stamp button img {
+    display: none;
+}
+tbody tr.complete .complete-stamp button img {
+    display: initial;
+}
 tbody th, td {
     padding-left: 16px;
 }

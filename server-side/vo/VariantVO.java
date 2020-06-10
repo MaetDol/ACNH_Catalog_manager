@@ -7,6 +7,8 @@ public class VariantVO {
     private String color_kr;
     private String file_id;
     private Integer item_id;
+
+	private Boolean is_owned;
     
 	public Integer getId() {
 		return id;

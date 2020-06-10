@@ -137,19 +137,59 @@ filter.addEventListener('focusout', hideApplicableFilters );
 
 
 // 시트 클릭 이벤트
-sheetBody.addEventListener('click', ({ target, path }) => {
-  let pressedButton = false;
-  for( let elem of path ) {
-    
-    if( elem.tagName === 'BUTTON' ) {
-      pressedButton = true;
+const findByQuery = (list, query) => {
+  for( let e of list ) {
+    if( query(e) ) {
+      return e;
     }
+  }
+  return null;
+};
+const findByTagName = (list, tagName) => {
+  return findByQuery( list, e => e.tagName === tagName );
+};
+const findByClassName = (list, cls) => {
+  return findByQuery( list, e => e.hasClass && e.hasClass(cls) );
+};
+const getRowModifyButtonsInfo = path => {
+  const button = findByTagName( path, 'BUTTON');
+  if( !button ) {
+    return {};
+  }
+  const td = findByTagName( path, 'TD');
+  let info = {
+    tdClass: td.className,
+    itemId: td.parentElement.dataset.itemId,
+  };
 
-    if( elem.tagName?.match(/^TH|^TD/) ) {
-      if( pressedButton ) {
-        console.log(target, elem.className )
-      }
-    }
+  if( td.hasClass('complete-stamp') ) {
+    const isComplete = findByClassName( path, 'complete') != null;
+    info = { ...info, state: !isComplete };
+  } else if( td.hasClass('variations') ) {
+
+    const li = findByTagName( path, 'LI');
+    const state = li.classList.contains('has');
+    const variantId = li.dataset.variantId;
+    info = { ...info, state, variantId };
+  }
+  return info;
+};
+sheetBody.addEventListener('click', ({ path }) => {
+  const {tdClass, itemId, variantId, state} = getRowModifyButtonsInfo( path );
+  if( !tdClass ) {
+    return;
+  }
+
+  switch( tdClass ) {
+    case 'complete-stamp':
+      sheet.setVariations( itemId, state );
+      break;
+    case 'variations':
+      sheet.setVariant( variantId, state );
+      break;
+    case 'delete':
+      sheet.removeItem( itemId );
+      break;
   }
 });
 
