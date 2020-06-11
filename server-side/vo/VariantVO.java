@@ -8,7 +8,8 @@ public class VariantVO {
     private String file_id;
     private Integer item_id;
 
-	private Boolean is_owned;
+	// Row item variant data
+	private RowItemVariantVO rowItemVariantVo;
     
 	public Integer getId() {
 		return id;

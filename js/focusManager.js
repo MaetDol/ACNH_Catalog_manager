@@ -14,13 +14,13 @@ class FocusManager {
       this.observer.observe( elem, option );
   }
 
-  updateFocusableCollection( elem=document.find('body')[0] ) {
+  updateFocusableCollection( elem=document.find('body') ) {
     this.focusableElements = this.getFocusableElements( elem );
     this.rowElements = Array.from( elem.find(`.${this.ROW_CLASS}`));
   }
 
   getFocusableElements( elem ) {
-    return Array.from( elem.find('*'))
+    return Array.from( elem.findAll('*'))
       .filter( e=> e.tabIndex != -1 && e.offsetParent !== null );
   }
 

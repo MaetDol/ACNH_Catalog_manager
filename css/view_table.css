@@ -185,7 +185,7 @@ tbody tr {
     border-bottom: 2px solid var(--disabled);
 }
 tbody tr.complete {
-    background: rgba(0,0,0,0.1);
+    background: rgba(20,70,5,0.1);
 }
 tbody tr td.complete-stamp button {
     display: flex;
@@ -202,11 +202,19 @@ tbody tr.complete .complete-stamp button img {
 tbody th, td {
     padding-left: 16px;
 }
+tbody .furniture-name {
+    position: relative;
+}
+tbody .furniture-name img {
+    width: 64px;
+}
 tbody .furniture-name .text-group {
     display: inline-block;
     margin-left: 16px;
     line-height: 0px;
-    vertical-align: top;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 tbody .furniture-name .kr {
     display: block;
@@ -231,10 +239,14 @@ tbody .variations li img {
 tbody .variations li .has {
     font-size: 0;
     float: left;
+    display: none;;
+}
+tbody .variations li.has .has {
+    display: inline;
 }
 tbody .variations li.has img,
 tbody .variations li.has .color-name {
-    opacity: 0.2;
+    opacity: 0.4;
 }
 tbody .delete button {
     padding: 8px 16px;

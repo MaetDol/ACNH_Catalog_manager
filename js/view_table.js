@@ -1,12 +1,12 @@
 
-const sheetBody = document.find('.table-wrapper table tbody')[0];
+const sheetBody = document.find('.table-wrapper table tbody');
 const sheet = new Sheet( sheetBody );
 
 
 // 검색창 관련 코드들
-const searchWrapper = document.find('#search')[0];
-const searchInput = document.find('#search_input')[0];
-const searchResult = document.find('#search-item')[0];
+const searchWrapper = document.find('#search');
+const searchInput = document.find('#search_input');
+const searchResult = document.find('#search-item');
 const showSearchResult = _ => searchResult.classList.add('show');
 const hideSearchResult = ({ relatedTarget }) => {
   if( !searchWrapper.contains( relatedTarget )) {
@@ -105,7 +105,6 @@ const autoComplete = e => {
   searchResult.innerHTML = elements;
 };
 const addOrRemoveItemToSheet = ({ key, target }) => {
-  console.log(e)
   if( key.toLowerCase() == 'enter' ) {
     const li = target.findParentByClass('focus-row');
     const itemId = li.dataset.itemId;
@@ -123,9 +122,9 @@ searchWrapper.addEventListener('keydown', addOrRemoveItemToSheet );
 
 
 // 필터창 관련 코드들
-const filter = document.find('#filter')[0];
-const showFilterButton = filter.find('.show-list')[0];
-const applicableFilters = document.find('#applicable-filters')[0];
+const filter = document.find('#filter');
+const showFilterButton = filter.find('.show-list');
+const applicableFilters = document.find('#applicable-filters');
 const showApplicableFilters = _ => applicableFilters.classList.add('show');
 const hideApplicableFilters = ({ relatedTarget }) => {
   if( !filter.contains( relatedTarget )) {
@@ -149,7 +148,7 @@ const findByTagName = (list, tagName) => {
   return findByQuery( list, e => e.tagName === tagName );
 };
 const findByClassName = (list, cls) => {
-  return findByQuery( list, e => e.hasClass && e.hasClass(cls) );
+  return findByQuery( list, e => e.classList && e.hasClass(cls) );
 };
 const getRowModifyButtonsInfo = path => {
   const button = findByTagName( path, 'BUTTON');
@@ -159,17 +158,17 @@ const getRowModifyButtonsInfo = path => {
   const td = findByTagName( path, 'TD');
   let info = {
     tdClass: td.className,
-    itemId: td.parentElement.dataset.itemId,
+    itemId: Number( td.parentElement.dataset.itemId ),
   };
 
   if( td.hasClass('complete-stamp') ) {
     const isComplete = findByClassName( path, 'complete') != null;
-    info = { ...info, state: !isComplete };
-  } else if( td.hasClass('variations') ) {
+    info = { ...info, state: isComplete };
 
+  } else if( td.hasClass('variations') ) {
     const li = findByTagName( path, 'LI');
     const state = li.classList.contains('has');
-    const variantId = li.dataset.variantId;
+    const variantId = Number( li.dataset.variantId );
     info = { ...info, state, variantId };
   }
   return info;
@@ -179,13 +178,12 @@ sheetBody.addEventListener('click', ({ path }) => {
   if( !tdClass ) {
     return;
   }
-
   switch( tdClass ) {
     case 'complete-stamp':
-      sheet.setVariations( itemId, state );
+      sheet.setCompleteRow( itemId, !state );
       break;
     case 'variations':
-      sheet.setVariant( variantId, state );
+      sheet.setVariant( itemId, variantId, !state );
       break;
     case 'delete':
       sheet.removeItem( itemId );
