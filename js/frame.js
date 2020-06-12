@@ -31,3 +31,32 @@ init();
 function isBodyElement(e) {
   return e.tagName == document.find('body').tagName;
 }
+
+function binarySearch( list, id, getNearIndex ) {
+  if( !list.length ) {
+    return 0;
+  }
+
+  const getPivot = ( start, end ) => start + Math.floor( (end - start) / 2 );
+  let end = list.length -1;
+  let start = 0;
+  let pivot = getPivot( start, end );
+
+  while( end >= start ) {
+    const compareId = list[pivot];
+    if( compareId === id ) {
+      return pivot;
+    } else if( compareId > id ) {
+      end = pivot-1;
+      pivot = getPivot( start, end );
+    } else {
+      start = pivot+1;
+      pivot = getPivot( start, end );
+    }
+  }
+
+  if( getNearIndex ) {
+    return getPivot( start, end );
+  }
+  return -1;
+}
