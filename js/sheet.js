@@ -41,7 +41,7 @@ class Sheet {
       variantUl.append( variantElement );
     }
 
-    item.row_element = rowNode;
+    item.row.element = rowNode;
     item.variants = item.variants.reduce( (acc, val) => {
       acc.set( val.id, val );
       return acc;
@@ -55,11 +55,17 @@ class Sheet {
     
     this.setData( item );
     this.sheet.append( rowNode );
+
+    const self = this;
+    item.variants.forEach( e => {
+      self.updateOwnedState( item, e.id );
+    });
+    this.updateCompleteState( item );    
   }
 
   removeItem( id ) {
     const item = this.getItem( id );
-    const rowElement = item.row_element;
+    const rowElement = item.row.element;
     rowElement.remove();
     this.removeItem( id );
   }
@@ -85,20 +91,13 @@ class Sheet {
     const variant = this.getVariant( item, variantId );
     
     variant.is_owned = state;
-    const variantElement = item.row_element.find(`[data-variant-id="${variantId}"]`);
-    if( state ) {
-      variantElement.classList.add('has');
-    } else {
-      variantElement.classList.remove('has');
-    }
-    
-    const completeState = this.isComplete( itemId );
-    this.setCompleteRow( itemId, completeState );
+    this.updateOwnedState( item, variantId );
+    this.updateCompleteState( item );
   }
 
   isComplete( itemId ) {
     const item = this.getItem( itemId );
-    for( let variant of item.variants ) {
+    for( let [id, variant] of item.variants ) {
       if( !variant.is_owned ) {
         return false;
       }
@@ -106,18 +105,40 @@ class Sheet {
     return true;
   }
 
+  isOwned( itemId, variantId ) {
+    const item = this.getItem( itemId );
+    const variant = this.getVariant( item, variantId );
+    return variant.is_owned;
+  }
+
+  updateCompleteState( item ) {
+    const isComplete = this.isComplete( item.id );
+    item.row.is_complete = isComplete;
+    if( isComplete ) {
+      item.row.element.classList.add('complete');
+    } else {
+      item.row.element.classList.remove('complete');
+    }
+  }
+
+  updateOwnedState( item, variantId ) {
+    const isOwned = this.isOwned( item.id, variantId );
+    const variantElement = item.row.element.find(`[data-variant-id="${variantId}"]`);
+    if( isOwned ) {
+      variantElement.classList.add('has');
+    } else {
+      variantElement.classList.remove('has');
+    }
+  }
+
   setCompleteRow( id, state ) {
     const item = this.getItem( id );
-    const rowElement = item.row_element;
-
-    item.variants.forEach( e => e.is_owned = state );
-    if( state ) {
-      rowElement.classList.add('complete');
-      rowElement.findAll('.variations li').forEach( e => e.classList.add('has') );
-    } else {
-      rowElement.classList.remove('complete');
-      rowElement.findAll('.variations li.has').forEach( e => e.classList.remove('has') );
-    }
+    const self = this;
+    item.variants.forEach( e => {
+      e.is_owned = state;
+      self.updateOwnedState( item, e.id );
+    });
+    this.updateCompleteState( item );
   }
 
 }

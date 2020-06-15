@@ -246,7 +246,7 @@ tbody .variations li.has .has {
 }
 tbody .variations li.has img,
 tbody .variations li.has .color-name {
-    opacity: 0.4;
+    opacity: 0.1;
 }
 tbody .delete button {
     padding: 8px 16px;

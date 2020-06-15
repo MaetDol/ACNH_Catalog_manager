@@ -16,7 +16,7 @@ class FocusManager {
 
   updateFocusableCollection( elem=document.find('body') ) {
     this.focusableElements = this.getFocusableElements( elem );
-    this.rowElements = Array.from( elem.find(`.${this.ROW_CLASS}`));
+    this.rowElements = Array.from( elem.findAll(`.${this.ROW_CLASS}`));
   }
 
   getFocusableElements( elem ) {
@@ -26,12 +26,12 @@ class FocusManager {
 
   moveUp() {
     const lastIndex = this.rowElements.length - 1;
-    this.moveToAdjacentRow( -1, val => val >= 0 ? val : lastIndex );
+    this.moveToAdjacentRow( -1, val => (val >= 0) ? val : lastIndex );
   }
 
   moveDown() {
     const rowElementsLength = this.rowElements.length;
-    this.moveToAdjacentRow( 1, val => val >= rowElementsLength ? 0 : val );
+    this.moveToAdjacentRow( 1, val => (val >= rowElementsLength) ? 0 : val );
   }
 
   moveToAdjacentRow( vector, toInRange ) {

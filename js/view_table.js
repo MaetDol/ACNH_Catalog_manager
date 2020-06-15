@@ -19,7 +19,7 @@ const focusSearchInput = ({ keyCode }) => {
   }
 };
 const autoComplete = e => {
-  // const datas = search( e.target.value );
+  // const datas = await search( e.target.value );
   const datas = [
     {
       id: 132,
@@ -86,6 +86,7 @@ const autoComplete = e => {
     },
   ];
   
+  // Replace to Template tag
   let elements = '';
   for( let data of datas ) {
     const isAdded = sheet.hasItem( data.id ) ? 'added' : '';
@@ -150,43 +151,38 @@ const findByTagName = (list, tagName) => {
 const findByClassName = (list, cls) => {
   return findByQuery( list, e => e.classList && e.hasClass(cls) );
 };
-const getRowModifyButtonsInfo = path => {
-  const button = findByTagName( path, 'BUTTON');
-  if( !button ) {
+const getRowInfo = ({ path }) => {
+  const clickedButton = findByTagName( path, 'BUTTON');
+  if( !clickedButton ) {
     return {};
   }
+
   const td = findByTagName( path, 'TD');
-  let info = {
-    tdClass: td.className,
-    itemId: Number( td.parentElement.dataset.itemId ),
-  };
-
-  if( td.hasClass('complete-stamp') ) {
-    const isComplete = findByClassName( path, 'complete') != null;
-    info = { ...info, state: isComplete };
-
-  } else if( td.hasClass('variations') ) {
-    const li = findByTagName( path, 'LI');
-    const state = li.classList.contains('has');
-    const variantId = Number( li.dataset.variantId );
-    info = { ...info, state, variantId };
-  }
-  return info;
+  const tdClass = td.className;
+  const itemId = Number( td.parentElement.dataset.itemId );
+  const item = sheet.getItem( itemId );
+  return { tdClass, item };
 };
-sheetBody.addEventListener('click', ({ path }) => {
-  const {tdClass, itemId, variantId, state} = getRowModifyButtonsInfo( path );
+sheetBody.addEventListener('click', e => {
+  const {tdClass, item} = getRowInfo( e );
   if( !tdClass ) {
     return;
   }
+  let state;
   switch( tdClass ) {
     case 'complete-stamp':
-      sheet.setCompleteRow( itemId, !state );
+      state = item.row.is_complete;
+      sheet.setCompleteRow( item.id, !state );
       break;
     case 'variations':
-      sheet.setVariant( itemId, variantId, !state );
+      const li = findByTagName( e.path, 'LI');
+      const variantId = Number( li.dataset.variantId );
+      const variant = sheet.getVariant( item, variantId );
+      state = variant.is_owned;
+      sheet.setVariant( item.id, variantId, !state );
       break;
     case 'delete':
-      sheet.removeItem( itemId );
+      sheet.removeItem( item.id );
       break;
   }
 });
@@ -196,6 +192,7 @@ sheetBody.addEventListener('click', ({ path }) => {
 const focusManager = new FocusManager();
 focusManager.watchMutation( filter );
 focusManager.watchMutation( searchWrapper );
+focusManager.watchMutation( sheetBody );
 window.addEventListener('keydown', ({ key }) => {
   switch( key ) {
     case 'ArrowLeft':
