@@ -58,6 +58,9 @@ section .table-name {
     vertical-align: top;
     margin-right: 8px;
 }
+#search .autocomple .image-wrapper img {
+    width: 48px;
+}
 #search .autocomple .text-wrapper {
     width: 168px;
     font-size: 0;

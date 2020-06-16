@@ -8,8 +8,8 @@ const searchWrapper = document.find('#search');
 const searchInput = document.find('#search_input');
 const searchResult = document.find('#search-item');
 const showSearchResult = _ => searchResult.classList.add('show');
-const hideSearchResult = ({ relatedTarget }) => {
-  if( !searchWrapper.contains( relatedTarget )) {
+const hideSearchResult = (e) => {
+  if( !searchWrapper.contains( e.relatedTarget )) {
     searchResult.classList.remove('show');
   }
 };
@@ -87,40 +87,44 @@ const autoComplete = e => {
   ];
   
   // Replace to Template tag
-  let elements = '';
+  let elements = [];
   for( let data of datas ) {
-    const isAdded = sheet.hasItem( data.id ) ? 'added' : '';
-    elements += `
-      <li class="${isAdded} focus-row" data-item-id="${data.id}">
-          <div class="image-wrapper">
-              <img src="acnhcdn사이트/${data.variants[0].file_id}" alt="${data.name_kr} 사진">
-          </div>
-          <div class="text-wrapper">
-              <button>
-                  <span class="kr">${data.name_kr}</span>
-                  <span class="en text small light">${data.name_en}</span>
-              </button>
-          </div>
-      </li>`;
-  }
-  searchResult.innerHTML = elements;
-};
-const addOrRemoveItemToSheet = ({ key, target }) => {
-  if( key.toLowerCase() == 'enter' ) {
-    const li = target.findParentByClass('focus-row');
-    const itemId = li.dataset.itemId;
+    const itemTemplate = document.find('#searchDropdownItem').content;
+    const li = itemTemplate.cloneNode( true ).find('li');
     
-    if( sheetItems[itemId] ) {
-      
+    const isAdded = sheet.hasItem( data.id );
+    if( isAdded ) {
+      li.classList.add('added');
     }
+    li.dataset.id = data.id;
+
+    const img = li.find('img');
+    img.src = sheet.ACNH_IMAGE_CDN + data.variants[0].file_id;
+    img.alt = data.name_kr;
+
+    li.find('.kr').textContent = data.name_kr;
+    li.find('.en').textContent = data.name_en;
+
+    elements.push(li);
   }
+  searchResult.innerHTML = '';
+  elements.forEach( e => searchResult.appendChild(e) );
+};
+const addOrRemoveItemToSheet = ({ target, path }) => {
+  const li = findByTagName( path, 'LI');
+  if( li === null ) {
+    return;
+  }
+  
+  const itemId = li.dataset.itemId;
+  const item = sheet.getItem( itemId );
+  const hasItem = sheet.hasItem( itemId );
 };
 searchInput.addEventListener('focus', showSearchResult );
 searchWrapper.addEventListener('focusout', hideSearchResult );
+searchWrapper.addEventListener('click', addOrRemoveItemToSheet );
 searchWrapper.addEventListener('keydown', focusSearchInput );
 searchWrapper.addEventListener('input', autoComplete );
-searchWrapper.addEventListener('keydown', addOrRemoveItemToSheet );
-
 
 // 필터창 관련 코드들
 const filter = document.find('#filter');
@@ -168,6 +172,7 @@ sheetBody.addEventListener('click', e => {
   if( !tdClass ) {
     return;
   }
+
   let state;
   switch( tdClass ) {
     case 'complete-stamp':
@@ -217,8 +222,7 @@ async function search( keyword ) {
 
 function isPrintableKeyCode( keyCode ) {
   // Reference: https://stackoverflow.com/a/12467610
-  return keyCode == 32 || keyCode == 13   || // spacebar & return key(s) (if you want to allow carriage returns)
-    (keyCode > 47 && keyCode < 58)   || // number keys
+  return(keyCode > 47 && keyCode < 58)   || // number keys
     (keyCode > 64 && keyCode < 91)   || // letter keys
     (keyCode > 95 && keyCode < 112)  || // numpad keys
     (keyCode > 185 && keyCode < 193) || // ;=,-./` (in order)

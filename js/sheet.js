@@ -10,28 +10,27 @@ class Sheet {
     this.datas.set( item.id, item );
   }
   
-  addItem( item ) {
-
+  createRowElement( item ) {
     const rowNode = 
       document.find('#sheetRow')
         .content
         .cloneNode( true )
         .find('tr');
     rowNode.dataset.itemId = item.id;
-    
+               
     const furniture = rowNode.find('.furniture-name');
     furniture.find('.kr').textContent = item.name_kr;
     furniture.find('.en').textContent = item.name_en;
     
     const variantUl = rowNode.find('.variations ul');
     const variantTemplate = document.find('#variantItem').content;
-    for( let variant of item.variants ) {
+    for( let [variantId, variant] of item.variants ) {
 
       const variantElement = 
         variantTemplate
         .cloneNode( true )
         .find('li');
-      variantElement.dataset.variantId = variant.id;
+      variantElement.dataset.variantId = variantId;
       variantElement.find('.color-name').textContent = variant.color_kr;
 
       const variantImage = variantElement.find('img');
@@ -41,20 +40,35 @@ class Sheet {
       variantUl.append( variantElement );
     }
 
-    item.row.element = rowNode;
-    item.variants = item.variants.reduce( (acc, val) => {
-      acc.set( val.id, val );
-      return acc;
-    }, new Map());
-
     const previewImage = furniture.find('img');
     const variant = item.variants.get( item.preview_variant_id );
     const imageSrc = this.ACNH_IMAGE_CDN + variant.file_id;
     previewImage.src = imageSrc + '.png';
     previewImage.alt = `${item.name_kr} 사진`;
-    
+
+    return rowNode;
+  }
+
+  addItem( item ) {
+
+    const isDeleted = this.hasItem( item.id ) && this.isDeleted( item.id );
+    if( isDeleted ) {
+      const item = this.getItem( item.id );
+      item.row.is_deleted = true;
+      this.sheet.append( item.row.elemet );
+      return;
+    }
+
+    item.variants = item.variants.reduce( (acc, val) => {
+      acc.set( val.id, val );
+      return acc;
+    }, new Map());
+
+    const rowElement = this.createRowElement( item );
+    item.row.element = rowElement;
+
     this.setData( item );
-    this.sheet.append( rowNode );
+    this.sheet.append( rowElement );
 
     const self = this;
     item.variants.forEach( e => {
@@ -65,17 +79,17 @@ class Sheet {
 
   removeItem( id ) {
     const item = this.getItem( id );
-    const rowElement = item.row.element;
-    rowElement.remove();
-    this.removeItem( id );
-  }
-
-  removeItem( id ) {
+    item.row.is_deleted = true;
+    item.row.element.remove();
     this.datas.delete( id );
   }
 
   hasItem( id ) {
     return this.datas.has( id );
+  }
+
+  isDeleted( id ) {
+    return this.getItem( id ).row.is_deleted;
   }
 
   getItem( id ) {
