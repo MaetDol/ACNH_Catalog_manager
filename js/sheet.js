@@ -50,12 +50,11 @@ class Sheet {
   }
 
   addItem( item ) {
-
     const isDeleted = this.hasItem( item.id ) && this.isDeleted( item.id );
     if( isDeleted ) {
-      const item = this.getItem( item.id );
-      item.row.is_deleted = true;
-      this.sheet.append( item.row.elemet );
+      item = this.getItem( item.id );
+      item.row.is_deleted = false;
+      this.sheet.append( item.row.element );
       return;
     }
 
@@ -81,7 +80,6 @@ class Sheet {
     const item = this.getItem( id );
     item.row.is_deleted = true;
     item.row.element.remove();
-    this.datas.delete( id );
   }
 
   hasItem( id ) {
@@ -156,5 +154,6 @@ class Sheet {
   }
 
 }
+
 
 // export { Sheet };

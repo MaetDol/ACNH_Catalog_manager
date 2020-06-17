@@ -37,7 +37,8 @@ class FocusManager {
   moveToAdjacentRow( vector, toInRange ) {
     const focusedElement = this.getFocusedElement();
     const rowElement = focusedElement.findParentByClass( this.ROW_CLASS );
-    if( isBodyElement( rowElement ) || isBodyElement( focusedElement )) {
+    const focusable = !rowElement || isBodyElement( rowElement ) || isBodyElement( focusedElement );
+    if( focusable ) {
       return this.moveToAdjacentElement( vector )
     }
 

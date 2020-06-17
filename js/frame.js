@@ -60,3 +60,20 @@ function binarySearch( list, id, getNearIndex ) {
   }
   return -1;
 }
+
+function findByQuery (list, query) {
+  for( let e of list ) {
+    if( query(e) ) {
+      return e;
+    }
+  }
+  return null;
+}
+
+function findByTagName (list, tagName) {
+  return findByQuery( list, e => e.tagName === tagName );
+}
+
+function findByClassName (list, cls) {
+  return findByQuery( list, e => e.classList && e.hasClass(cls) );
+}
