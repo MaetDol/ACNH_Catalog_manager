@@ -43,15 +43,15 @@
                 </ul>
 
                 <ul id="applied-filters">
-                    <li><button class="tag true">DIY제작 불가능<span class="ic ic-close">삭제</span></button></li>
-                    <li><button class="tag true">너굴상점 구매가능<span class="ic ic-close">삭제</span></button></li>
-                    <li><button class="tag false">리폼 불가능<span class="ic ic-close">삭제</span></button></li>
+                    <li data-tag-id="1"><button class="tag true">DIY제작 불가능<span class="ic ic-close">삭제</span></button></li>
+                    <li data-tag-id="2"><button class="tag true">너굴상점 구매가능<span class="ic ic-close">삭제</span></button></li>
+                    <li data-tag-id="3"><button class="tag false">리폼 불가능<span class="ic ic-close">삭제</span></button></li>
                 </ul>
             </div>
             
             <div id="search" class="focus-row">
-                <input id="search_input" type="text" required>
-                <label for="search_input">검색어를 입력하세요</label>
+                <input id="search-input" type="text" required>
+                <label for="search-input">검색어를 입력하세요</label>
                 <ul id="search-item" class="autocomple dropdown">
                 </ul>
             </div>
@@ -83,6 +83,21 @@
             </p>
         </footer>
     </div>
+
+    <template id="appliedTagItem">
+        <li data-tag-id="1">
+            <button class="tag true">
+                DIY제작 불가능
+                <span class="ic ic-close">삭제</span>
+            </button>
+        </li>
+    </template>
+
+    <template id="filterDropdownItem">
+        <li class="added focus-row" data-tag-id="1">
+            <button></button>
+        </li>
+    </template>
 
     <template id="searchDropdownItem">
         <li class="focus-row" data-item-id="">
@@ -134,6 +149,9 @@
     <script src="js/frame.js"></script>
     <script src="js/sheet.js"></script>
     <script src="js/focusManager.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/filter.js"></script>
+
     <script src="js/view_table.js"></script>
 
     <script src="js/sheet_test_data.js"></script>
