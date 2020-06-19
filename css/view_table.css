@@ -145,7 +145,6 @@ section .table-name {
     overflow-y: scroll;
     height: 640px;
     background: white;
-    box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
     clear: both;
 }
 table {
@@ -235,11 +234,22 @@ tbody .variations li {
     display: inline-block;
     position: relative;
     padding: 0 8px;
+    width: 72px;
+}
+tbody .variations li button {
+    width: 100%;
 }
 tbody .variations li img {
     width: 48px;
     margin: auto;
     display: block;
+}
+tbody .variations li span {
+    width: 100%;
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 tbody .variations li .has {
     font-size: 0;

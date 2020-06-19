@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이템 데이터 삽입 페이지</title>
+    <link rel="stylesheet" href="css/frame.css">
+    <link rel="stylesheet" href="css/edit_item.css">
+</head>
+<body>
+    <div id="container">
+        <h1 class="title">
+            <a class="underline" href="/">아이템 데이터 삽입 페이지</a>
+        </h1>
+
+        <form class="box-shadow" action="/admin/item/insert" method="POST">
+            <section id="inputs" class="input">
+                <div id="item">
+                    <h2>아이템</h2>
+                    <div class="wrap">
+                        <label for="id">아이디</label>
+                        <input type="text" name="id">
+                    </div>
+                    <div class="wrap">
+                        <label for="name_kr">한글 이름</label>
+                        <input type="text" name="name_kr">
+                    </div>
+                    <div class="wrap">
+                        <label for="name_en">영어 명</label>
+                        <input type="text" name="name_en">
+                    </div>
+                </div>
+    
+                <div id="variant-input">
+                    <h2>바리에이션</h2>
+                    <div class="wrap">
+                        <label for="color_kr">한글 색상명</label>
+                        <input type="text" data-property="color_kr" id="color_kr">
+                    </div>
+                    <div class="wrap">
+                        <label for="color_en">영어 색상명</label>
+                        <input type="text" data-property="color_en" id="color_en">
+                    </div>
+                    <div class="wrap file_id-wrapper">
+                        <label for="file_id">파일 이름</label>
+                        <input type="text" data-property="file_id" id="file_id">
+                    </div>
+                    <button id="add-variant" type="button">추가</button>
+                </div>
+                
+                <div id="tags">
+                    <h2>태그</h2>
+                    <div class="labels">
+                        <label for="tags[0].id">태그 종류</label>
+                    </div>
+                    <button id="add-tag" type="button">추가</button>
+                    <ol>
+                        <li data-type="tags">
+                            <input type="text" data-property="id" name="tags[0].id">
+                        </li>
+                    </ol>
+                </div>
+                <button id="submit" type="button">등록</button>
+            </section>
+            
+            <section id="item-list" class="variants">
+                <ol id="variants">
+                </ol>
+            </section>
+        </form>
+
+        <footer>
+            <p class="text light small">본 사이트는 비영리 목적으로 제작된 웹 페이지 입니다</p>
+            <p class="text light small">This page is a 3rd-party application that claims <br>
+                no ownership of any intellectual property associated with <br>
+                Nintendo or Animal Crossing.
+            </p>
+        </footer>
+    </div>
+
+    <template id="variant-template" data-count="0">
+        <li data-type="variants">
+            <img src="" alt="">
+            <input type="text" data-property="color_kr">
+            <input type="text" data-property="color_en">
+            <input type="text" data-property="file_id">
+        </li>
+    </template>
+
+    <template id="tag-template" data-count="1">
+        <li data-type="tags">
+            <input type="text" data-property="id">
+        </li>
+    </template>
+
+    <script src="js/frame.js"></script>
+    <script src="js/edit_item.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+</body>
+</html>

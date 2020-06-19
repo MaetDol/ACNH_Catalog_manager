@@ -31,6 +31,7 @@ class Sheet {
         .cloneNode( true )
         .find('li');
       variantElement.dataset.variantId = variantId;
+      variantElement.find('button').title = variant.color_kr;
       variantElement.find('.color-name').textContent = variant.color_kr;
 
       const variantImage = variantElement.find('img');
